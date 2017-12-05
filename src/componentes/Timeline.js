@@ -11,7 +11,7 @@ export default class Timeline extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/api/public/fotos/alots')
+    fetch(`http://localhost:8080/api/fotos?X-AUTH-TOKEN${localStorage.getItem('auth-token')}`)
       .then(response => response.json())
       .then(fotos => {
         this.setState({
