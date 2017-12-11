@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 export default class Login extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      msg: ''
+      msg: this.props.location.query.msg
     };
   }
 
   envia(event) {
     event.preventDefault();
+
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({
@@ -20,7 +22,8 @@ export default class Login extends Component {
       headers: new Headers({
         'Content-type': 'application/json'
       })
-    }
+    };
+
     fetch('http://localhost:8080/api/public/login', requestInfo)
       .then(response => {
         if (response.ok) {
@@ -31,14 +34,13 @@ export default class Login extends Component {
       })
       .then(token => {
         localStorage.setItem('auth-token', token);
-        this.props.history.push('/timeline');
+        browserHistory.push('/timeline');
       })
       .catch(error => {
         this.setState({
           msg: error.message
         });
-      })
-
+      });
   }
 
   render() {
@@ -52,6 +54,6 @@ export default class Login extends Component {
           <input type="submit" value="login" />
         </form>
       </div>
-    )
+      );
   }
 }

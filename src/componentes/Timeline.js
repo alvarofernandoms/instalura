@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import FotoItem from './FotoItem';
-import Login from './Login';
-import { Redirect, Route, Switch } from 'react-router-dom';
 
 export default class Timeline extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       fotos: []
     };
+    this.login = this.props.login;
   }
 
   carregaFotos() {
     let urlPerfil;
+
     if (this.login === undefined) {
       urlPerfil = `http://localhost:8080/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`;
     } else {
-      urlPerfil = `http://localhost:8080/api/public/fotos/${this.login}}`;
+      urlPerfil = `http://localhost:8080/api/public/fotos/${this.login}`;
     }
+
     fetch(urlPerfil)
       .then(response => response.json())
       .then(fotos => {
@@ -29,13 +30,7 @@ export default class Timeline extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('auth-token') === null) {
-      console.log('não logado');
-      // this.context.history.push('/');
-      <Redirect to={ { pathname: '/', state: { from: this.props.location } } } />
-    } else {
-      this.carregaFotos();
-    }
+    this.carregaFotos();
   }
 
   componentWillReceiveProps(nextProps) {

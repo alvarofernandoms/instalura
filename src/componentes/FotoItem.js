@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class FotoAtualizacoes extends Component {
   render() {
@@ -17,12 +18,12 @@ class FotoAtualizacoes extends Component {
 class FotoInfo extends Component {
   render() {
     return (
-      <div className="foto-info">
+      <div className="foto-in fo">
         <div className="foto-info-likes">
           { this.props.foto.likers.map(liker => {
-              return <a href="#">
-                       { liker.login },</a>
-            }) }
+              return (<Link key={ liker.login } href={ `/timeline/${liker.login}` }>
+                      { liker.login },</Link>)
+            }) } curtiram
         </div>
         <p className="foto-info-legenda">
           <a className="foto-info-autor">autor </a>
@@ -31,12 +32,12 @@ class FotoInfo extends Component {
         <ul className="foto-info-comentarios">
           { this.props.foto.comentarios.map(comentario => {
               return (
-                <li className="comentario">
-                  <a className="foto-info-autor">
-                    { comentario.login } </a>
+                <li className="comentario" key={ comentario.id }>
+                  <Link to={ `/timeline/${comentario.login}` } className="foto-info-autor">
+                  { comentario.login } </Link>
                   { comentario.texto }
                 </li>
-              )
+                );
             }) }
         </ul>
       </div>
@@ -51,9 +52,9 @@ class FotoHeader extends Component {
         <figure className="foto-usuario">
           <img src={ this.props.foto.urlPerfil } alt="foto do usuario" />
           <figcaption className="foto-usuario">
-            <a href="#">
-              { this.props.foto.loginUsuario }
-            </a>
+            <Link to={ `/timeline/${this.props.foto.loginUsuario}` }>
+            { this.props.foto.loginUsuario }
+            </Link>
           </figcaption>
         </figure>
         <time className="foto-data">
