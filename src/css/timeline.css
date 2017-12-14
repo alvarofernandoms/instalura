@@ -94,7 +94,6 @@ body {
   padding: 0 2%;
 }
 
-
 .foto-usuario {
   display: flex;
   align-items: center;
@@ -123,7 +122,6 @@ body {
   max-width: 100%;
 }
 
-
 .foto-info {
   padding: 1em;
 }
@@ -145,7 +143,6 @@ body {
 .foto-info-autor {
   font-weight: bold;
 }
-
 
 .foto-info-comentarios {
   list-style: none;
@@ -190,7 +187,6 @@ body {
   margin-right: 1em;
 }
 
-
 .fotoAtualizacoes-form {
   display: flex;
   width: 100%;
@@ -208,4 +204,22 @@ body {
   background-color: #069;
   color: #fff;
   height: 2.4em;
+}
+
+.timeline-enter {
+  opacity: 0.01;
+}
+
+.timeline-enter.timeline-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.timeline-leave {
+  opacity: 1;
+}
+
+.timeline-leave.timeline-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

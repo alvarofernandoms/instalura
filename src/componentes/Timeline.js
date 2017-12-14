@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FotoItem from './FotoItem';
 import PubSub from 'pubsub-js';
+import { CSSTransitionGroup } from 'react-transition-group' // ES6
 
 export default class Timeline extends Component {
 
@@ -52,7 +53,9 @@ export default class Timeline extends Component {
   render() {
     return (
       <div className="fotos container">
-        { this.state.fotos.map(foto => <FotoItem key={ foto.id } foto={ foto } />) }
+        <CSSTransitionGroup transitionName="timeline" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 300 }>
+          { this.state.fotos.map(foto => <FotoItem key={ foto.id } foto={ foto } />) }
+        </CSSTransitionGroup>
       </div>
       );
   }
