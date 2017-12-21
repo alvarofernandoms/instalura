@@ -6,7 +6,6 @@ class FotoAtualizacoes extends Component {
   like(event) {
     event.preventDefault();
     this.props.like(this.props.foto.id)
-    console.log(this.props.foto);
   }
 
   comenta(event) {
