@@ -26,7 +26,11 @@ export default class TimelineApi {
           }
         })
         .then(liker => {
-          dispatch({type: 'LIKE', fotoId, liker});
+          dispatch({
+            type: 'LIKE',
+            fotoId,
+            liker
+          });
           return liker;
         });
     }
