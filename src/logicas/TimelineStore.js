@@ -1,6 +1,6 @@
 import PubSub from 'pubsub-js';
 
-export default class LogicaTimeline {
+export default class TimelineStore {
 
   constructor(fotos) {
     this.fotos = fotos;
@@ -40,16 +40,16 @@ export default class LogicaTimeline {
       });
   }
 
-  comenta(fotoId, textoCometario) {
+  comenta(fotoId, textoComentario) {
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({
-        texto: textoCometario
+        texto: textoComentario
       }),
       headers: new Headers({
         'Content-type': 'application/json'
       })
-    }
+    };
 
     fetch(`http://localhost:8080/api/fotos/${fotoId}/comment?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`, requestInfo)
       .then(response => {
@@ -60,10 +60,10 @@ export default class LogicaTimeline {
         }
       })
       .then(novoComentario => {
-        const fotoAchada = this.fotos.find(foto => foto.id === fotoId)
+        const fotoAchada = this.fotos.find(foto => foto.id === fotoId);
         fotoAchada.comentarios.push(novoComentario);
         PubSub.publish('timeline', this.fotos);
-      })
+      });
   }
 
   subscribe(callback) {
