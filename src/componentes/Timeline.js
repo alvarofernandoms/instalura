@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FotoItem from './FotoItem';
 import { CSSTransitionGroup } from 'react-transition-group' // ES6
-import TimelineApi from '../logicas/TimelineApi'
+import TimelineApi from '../logicas/TimelineApi';
 
 export default class Timeline extends Component {
 
@@ -14,9 +14,9 @@ export default class Timeline extends Component {
   }
 
   componentWillMount() {
-    this.props.store.subscribe(fotos => {
+    this.props.store.subscribe((fotos) => {
       this.setState({
-        fotos: this.props.store.getState()
+        fotos: this.props.store.getState().timeline
       });
     })
   }
