@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TimelineApi from '../logicas/TimelineApi';
-import PubSub from 'pubsub-js';
 
 export default class Header extends Component {
 
@@ -10,16 +9,6 @@ export default class Header extends Component {
       msg: ''
     };
   }
-
-  componentDidMount() {
-    this.props.store.subscribe(() => {
-      this.setState({
-        msg: this.props.store.getState().notificacao
-      });
-    });
-  }
-
-
 
   pesquisa(event) {
     event.preventDefault();
